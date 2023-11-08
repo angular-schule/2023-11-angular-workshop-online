@@ -7,3 +7,7 @@ export interface Book {
   price: number;
 }
 
+// Argumente für Rohdaten + Interface statt Klasse:
+// - Serialisierbarkeit
+// - Klonbarkeit
+// Mehr dazu im Buch ab Seite 94
