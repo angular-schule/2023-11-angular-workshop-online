@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
 
@@ -7,7 +7,7 @@ import { BookComponent } from '../book/book.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, BookComponent],
+  imports: [NgIf, NgFor, BookComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
