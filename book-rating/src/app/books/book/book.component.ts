@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
 import { RatingComponent } from '../rating/rating.component';
@@ -14,4 +14,19 @@ export class BookComponent {
   // hier dürfen Daten von der Elternkomponente hineinfließen
   // von oben nach unten
   @Input({ required: true }) book?: Book;
+
+  // hier fließen Daten zur Elternkomponente hinaus
+  // von unten nach oben
+  @Output() rateUp = new EventEmitter<Book>();
+  @Output() rateDown = new EventEmitter<Book>();
+
+  doRateUp() {
+    this.rateUp.emit(this.book);
+  }
+
+  doRateDown() {
+    this.rateDown.emit(this.book);
+  }
 }
+
+
