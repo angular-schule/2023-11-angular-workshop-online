@@ -9,5 +9,5 @@ export interface Book {
 
 // Argumente für Rohdaten + Interface statt Klasse:
 // - Serialisierbarkeit
-// - Klonbarkeit
+// - Klonbarkeit / Immutability
 // Mehr dazu im Buch ab Seite 94
