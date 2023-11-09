@@ -13,5 +13,5 @@ import { RatingComponent } from '../rating/rating.component';
 export class BookComponent {
   // hier dürfen Daten von der Elternkomponente hineinfließen
   // von oben nach unten
-  @Input() book?: Book;
+  @Input({ required: true }) book?: Book;
 }
