@@ -10,7 +10,7 @@ export class BookRatingService {
 
   rateUp(book: Book): Book {
     return {
-      ...book,
+      ...book, // Spread Operator
       rating: book.rating < 5 ? book.rating + 1 : 5
     };
   }

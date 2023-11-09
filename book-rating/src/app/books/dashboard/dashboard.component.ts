@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
+import { BookRatingService } from '../shared/book-rating.service';
 
 
 @Component({
@@ -14,7 +15,9 @@ import { BookComponent } from '../book/book.component';
 export class DashboardComponent {
   books: Book[] = [];
 
-  constructor() {
+  private rs2 = inject(BookRatingService);
+
+  constructor(private rs: BookRatingService) {
     this.books = [
       {
         isbn: '123',
@@ -34,11 +37,28 @@ export class DashboardComponent {
   }
 
   doRateUp(book: Book) {
-    console.log('UP', book);
+    const ratedBook = this.rs.rateUp(book);
+    this.updateList(ratedBook);
   }
 
   doRateDown(book: Book) {
-    console.log('DOWN', book);
+    const ratedBook = this.rs.rateDown(book);
+    this.updateList(ratedBook);
+  }
+
+  private updateList(ratedBook: Book) {
+    // [1,2,3,4,5].map(e => e * 10) // [10, 20, 30, 40, 50]
+    // [1,2,3,4,5].map(e => e) // [1, 2, 3, 4, 5]
+    // [1,2,3,4,5].filter(e => e > 3) // [4, 5]
+    // [1,2,3,4,5].find()
+
+    this.books = this.books.map(b => {
+      if (b.isbn === ratedBook.isbn) {
+        return ratedBook;
+      } else {
+        return b;
+      }
+    });
   }
 }
 
