@@ -6,7 +6,10 @@ import { Book } from './book';
 })
 export class BookRatingService {
 
-  constructor() { }
+  readonly MAX_RATING = 5;
+  readonly MIN_RATING = 1;
+
+  constructor() {}
 
   rateUp(book: Book): Book {
     return {

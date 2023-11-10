@@ -14,6 +14,8 @@ import { BookRatingService } from '../shared/book-rating.service';
 })
 export class DashboardComponent {
   books: Book[] = [];
+  minRating = this.rs.MIN_RATING;
+  maxRating = this.rs.MAX_RATING;
 
   private rs2 = inject(BookRatingService);
 
