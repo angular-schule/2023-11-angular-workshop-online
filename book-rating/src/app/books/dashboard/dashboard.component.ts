@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, TrackByFunction, inject, signal } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
@@ -20,6 +20,10 @@ export class DashboardComponent {
   maxRating = this.rs.MAX_RATING;
 
   private rs2 = inject(BookRatingService);
+
+  trackBook: TrackByFunction<Book> = (index, book) => {
+    return book.isbn;
+  }
 
   constructor(private rs: BookRatingService, private bs: BookStoreService) {
     this.bs.getAll().subscribe(books => {
