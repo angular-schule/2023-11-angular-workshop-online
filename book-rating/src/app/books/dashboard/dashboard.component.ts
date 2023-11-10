@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
@@ -14,12 +14,15 @@ import { BookRatingService } from '../shared/book-rating.service';
 })
 export class DashboardComponent {
   books: Book[] = [];
+  // booksS = signal<Book[]>([]);
+  
   minRating = this.rs.MIN_RATING;
   maxRating = this.rs.MAX_RATING;
 
   private rs2 = inject(BookRatingService);
 
   constructor(private rs: BookRatingService) {
+    // this.booksS.set([ /* ... */ ]);
     this.books = [
       {
         isbn: '123',
@@ -54,13 +57,17 @@ export class DashboardComponent {
     // [1,2,3,4,5].filter(e => e > 3) // [4, 5]
     // [1,2,3,4,5].find()
 
-    this.books = this.books.map(b => {
+
+    const newBookList = this.books.map(b => {
       if (b.isbn === ratedBook.isbn) {
         return ratedBook;
       } else {
         return b;
       }
     });
+
+    this.books = newBookList;
+    // this.booksS.set(newBookList);
   }
 }
 
