@@ -43,8 +43,16 @@ export class BookCreateComponent {
         Validators.max(10000),
         Validators.min(0)
       ]
-    }),
-  })
+    })
+  });
+
+  // "nimm den Typ aller Schlüssel von bookForm.controls"
+  isInvalid(controlName: keyof typeof this.bookForm.controls): boolean {
+    const control = this.bookForm.controls[controlName];
+    // Alternative: this.bookForm.get(controlName);
+
+    return control.touched && control.invalid;
+  }
 }
 
 /*
@@ -52,6 +60,7 @@ TODO:
 - Fehlermeldungen anzeigen
   - "Die IBSN ist ungültig"
   - "Die ISBN ist zu kurz."
+- Button nur aktivieren, wenn Formular gültig
 - abschicken
 - HTTP
 - bei Erfolg:
