@@ -2,6 +2,7 @@
   *ngFor="let b of books; trackBy: trackBook"
   (rateUp)="doRateUp($event)"
   (rateDown)="doRateDown($event)"
+  (delete)="doDelete($event)"
   [book]="b"
   [maxRating]="maxRating"
   [minRating]="minRating"></app-book>

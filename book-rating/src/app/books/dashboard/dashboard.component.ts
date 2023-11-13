@@ -42,6 +42,12 @@ export class DashboardComponent {
     this.updateList(ratedBook);
   }
 
+  doDelete(isbn: string) {
+    this.bs.delete(isbn).subscribe(() => {
+      this.bs.getAll().subscribe(books => this.books = books);
+    })
+  }
+
   private updateList(ratedBook: Book) {
     // [1,2,3,4,5].map(e => e * 10) // [10, 20, 30, 40, 50]
     // [1,2,3,4,5].map(e => e) // [1, 2, 3, 4, 5]
