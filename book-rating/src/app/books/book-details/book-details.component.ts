@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 
 @Component({
@@ -12,18 +14,20 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class BookDetailsComponent {
 
+  book?: Book;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private bs: BookStoreService) {
     // PULL
     // const isbn = this.route.snapshot.paramMap.get('isbn') // path: 'books/:isbn'
 
     // PUSH
+    // TODO: Verschachtelte Subscriptions vermeiden
     this.route.paramMap.subscribe(params => {
       const isbn = params.get('isbn')!; // Non-Null Assertion
 
-      // AUFGABE:
-      // Buch abrufen / HTTP
-      // Buch anzeigen (ganz einfach)
+      this.bs.getSingle(isbn).subscribe(book => {
+        this.book = book;
+      });
     });
   }
 }
