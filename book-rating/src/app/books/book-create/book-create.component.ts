@@ -49,7 +49,12 @@ export class BookCreateComponent {
   // "nimm den Typ aller Schlüssel von bookForm.controls"
   isInvalid(controlName: keyof typeof this.bookForm.controls): boolean {
     const control = this.bookForm.controls[controlName];
-    // Alternative: this.bookForm.get(controlName);
+
+    /*const control2 = this.bookForm.get(controlName);
+
+    if (!control2) {
+      return false;
+    }*/
 
     return control.touched && control.invalid;
   }
