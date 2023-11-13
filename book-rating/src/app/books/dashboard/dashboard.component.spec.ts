@@ -60,12 +60,11 @@ describe('DashboardComponent', () => {
     // spyOn(service, 'rateUp').and.callFake(b => b);
     spyOn(service, 'rateUp').and.callThrough();
 
-
     // Act
     component.doRateUp(testBook);
 
     // Assert
-    // prüfen, ob Service-Methode aufgerufen wurde
+    // prüfen, ob Service-Methode genau einmal mit "testBook" aufgerufen wurde
     expect(service.rateUp).toHaveBeenCalledOnceWith(testBook);
 
   });

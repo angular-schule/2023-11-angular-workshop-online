@@ -1,4 +1,4 @@
-import { Component, TrackByFunction, inject, signal } from '@angular/core';
+import { Component, TrackByFunction, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';

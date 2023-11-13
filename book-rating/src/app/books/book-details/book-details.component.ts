@@ -11,9 +11,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent {
-  // ISBN aus der URL lesen
-  // Buch abrufen / HTTP
-  // Buch anzeigen
+
 
   constructor(private route: ActivatedRoute) {
     // PULL
@@ -21,8 +19,11 @@ export class BookDetailsComponent {
 
     // PUSH
     this.route.paramMap.subscribe(params => {
-      const isbn = params.get('isbn');
-      console.log(isbn);
+      const isbn = params.get('isbn')!; // Non-Null Assertion
+
+      // AUFGABE:
+      // Buch abrufen / HTTP
+      // Buch anzeigen (ganz einfach)
     });
   }
 }
