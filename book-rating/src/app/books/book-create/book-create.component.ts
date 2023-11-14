@@ -58,6 +58,12 @@ export class BookCreateComponent {
 
     return control.touched && control.invalid;
   }
+
+  hasError(controlName: keyof typeof this.bookForm.controls, errorCode: string): boolean {
+    // "Hat dieses Control diesen bestimmten Fehler?"
+    const control = this.bookForm.controls[controlName];
+    return control.hasError(errorCode) && control.touched;
+  }
 }
 
 /*
