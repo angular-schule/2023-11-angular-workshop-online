@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-create',
@@ -46,6 +49,8 @@ export class BookCreateComponent {
     })
   });
 
+  constructor(private bs: BookStoreService, private router: Router) {}
+
   // "nimm den Typ aller Schlüssel von bookForm.controls"
   isInvalid(controlName: keyof typeof this.bookForm.controls): boolean {
     const control = this.bookForm.controls[controlName];
@@ -63,6 +68,27 @@ export class BookCreateComponent {
     // "Hat dieses Control diesen bestimmten Fehler?"
     const control = this.bookForm.controls[controlName];
     return control.hasError(errorCode) && control.touched;
+  }
+
+  submitForm() {
+    if (this.bookForm.invalid) {
+      return;
+    }
+
+    // this.bookForm.value: nur aktivierte Controls
+    // this.bookForm.getRawValue(): alle Controls, auch deaktivierte
+    const newBook: Book = this.bookForm.getRawValue();
+
+    /*const newBook: Book = {
+      ...this.bookForm.getRawValue(),
+      price: this.bookForm.getRawValue().price ?? 0
+    };*/
+
+
+    this.bs.create(newBook).subscribe(receivedBook => {
+      // this.router.navigate(['/books']); // Dashboard
+      this.router.navigate(['/books', receivedBook.isbn]); // Detailseite
+    });
   }
 }
 
