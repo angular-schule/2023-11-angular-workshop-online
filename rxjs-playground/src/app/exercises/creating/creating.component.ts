@@ -24,6 +24,25 @@ export class CreatingComponent {
 
     /******************************/
 
+    // of('Frankfurt', 'Hamburg', 'München', 'Leipzig')
+    // from([1,2,3,4,5,6,7])
+    // interval(1000)    // ---0---1---2---3---4---5---6 ...
+    // timer(1000, 1000) // ---0---1---2---3---4---5---6 ...
+    // timer(3000)       // ---------0|
+    // timer(3000, 1000) // ---------0---1---2---3---4---5---6 ...
+    // timer(0, 1000)    // 0---1---2---3---4---5---6 ...
+
+    timer(0, 1000).pipe(
+      map(e => e * 3),
+      filter(e => e % 2 === 0)
+    ).subscribe({
+      next: e => this.log(e),
+      complete: () => this.log('COMPLETE')
+    });
+
+
+    /******************************/
+
     function producer(sub: Subscriber<number>) {
       const result = Math.random();
       sub.next(result);
@@ -35,23 +54,20 @@ export class CreatingComponent {
       setTimeout(() => sub.complete(), 6000);
     }
 
-/////////////
     const obs: Observer<number> = {
       next: (e: number) => console.log(e),
       error: (err: any) => console.log('ERROR:', err),
       complete: () => console.log('COMPLETE')
     };
 
+    // Finnische Notation
     const myObs$ = new Observable(producer);
     /*const myObs2$ = new Observable(sub => {
       sub.next(1);
     });*/
 
     // producer(obs);
-    myObs$.subscribe(obs);
-
-
-
+    // myObs$.subscribe(obs);
 
     /******************************/
   }
