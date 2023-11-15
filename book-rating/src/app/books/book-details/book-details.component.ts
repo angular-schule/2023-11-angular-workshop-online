@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
-import { concatMap, map, switchMap } from 'rxjs';
+import { Observable, concatMap, map, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-book-details',
@@ -14,19 +14,16 @@ import { concatMap, map, switchMap } from 'rxjs';
 })
 export class BookDetailsComponent {
 
-  book?: Book;
+  book$: Observable<Book>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) {
     // PULL
     // const isbn = this.route.snapshot.paramMap.get('isbn') // path: 'books/:isbn'
 
     // PUSH
-    this.route.paramMap.pipe(
+    this.book$ = this.route.paramMap.pipe(
       map(params => params.get('isbn')!),
       switchMap(isbn => this.bs.getSingle(isbn))
-    ).subscribe(book => {
-      this.book = book;
-    })
-
+    );
   }
 }
