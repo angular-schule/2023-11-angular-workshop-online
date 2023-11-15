@@ -26,7 +26,7 @@ export class ErrorHandlingComponent {
         console.log(err);
 
         ///////////
-        // Fehler ersetzen
+        // Fehler ersetzen durch normale next-Elemente
         // return of('Nichts', 'passiert', '😇');
 
         // Fehler ignorieren
@@ -35,6 +35,7 @@ export class ErrorHandlingComponent {
 
         // Fehler weiterwerfen
         // return throwError(() => 'BÖSER FEHLER! 🤬');
+        // throw err;
         throw 'DAS IST EIN FEHLER! 😡';
       })
     ).subscribe({

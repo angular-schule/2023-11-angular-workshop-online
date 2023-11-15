@@ -62,9 +62,13 @@ export class CreatingComponent {
 
     // Finnische Notation
     const myObs$ = new Observable(producer);
-    /*const myObs2$ = new Observable(sub => {
+
+
+    const myObs2$ = new Observable(sub => {
       sub.next(1);
-    });*/
+    });
+
+    ////////////////////////////////////////////////
 
     // producer(obs);
     // myObs$.subscribe(obs);
